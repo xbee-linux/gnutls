@@ -24,7 +24,7 @@ description: |
 var:
   version: 3.7.3
 
-dependencies:
+builders:
   - pkg-config
   - nettle
   - gmp
