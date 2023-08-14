@@ -21,7 +21,7 @@ description: |
     srptool: is a simple program that emulates the programs in the Stanford SRP (Secure Remote Password) libraries using GnuTLS
     libgnutls.so: contains the core API functions and X.509 certificate API functions
 
-in:
+var:
   version: 3.7.3
 
 dependencies:
@@ -35,13 +35,13 @@ dependencies:
 
 provision:
   - url:
-      from: https://www.gnupg.org/ftp/gcrypt/gnutls/v{{ majorVersion .pack.version }}.{{ minorVersion .pack.version }}/gnutls-{% version %}.tar.xz
-      todir: "{% xbeeSrc %}"
+      from: https://www.gnupg.org/ftp/gcrypt/gnutls/v{{ majorVersion .version }}.{{ minorVersion .version }}/gnutls-{{ .version }}.tar.xz
+      todir: "{{ .xbee.src }}"
 
 build:
   - shell:
       cmds:
         - ./configure --prefix=/usr --docdir=/usr/share/doc/gnutls-3.7.3 --disable-guile --disable-rpath --with-default-trust-store-pkcs11="pkcs11:"
         - make
-        - make install DESTDIR="{% xbeeOut %}"
-      directory: "{% xbeeSrc %}/gnutls-{% version %}"
+        - make install DESTDIR="{{ .xbee.out }}"
+      directory: "{{ .xbee.src }}/gnutls-{{ .version }}"
