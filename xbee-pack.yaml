@@ -22,7 +22,8 @@ description: |
     libgnutls.so: contains the core API functions and X.509 certificate API functions
 
 var:
-  version: 3.7.3
+  xbee:
+    version: 3.7.3
 
 builders:
   - pkg-config
@@ -35,7 +36,7 @@ builders:
 
 provision:
   - url:
-      from: https://www.gnupg.org/ftp/gcrypt/gnutls/v{{ majorVersion .version }}.{{ minorVersion .version }}/gnutls-{{ .version }}.tar.xz
+      from: https://www.gnupg.org/ftp/gcrypt/gnutls/v{{ majorVersion .xbee.version }}.{{ minorVersion .xbee.version }}/gnutls-{{ .xbee.version }}.tar.xz
       todir: "{{ .xbee.src }}"
 
 build:
@@ -44,4 +45,4 @@ build:
         - ./configure --prefix=/usr --docdir=/usr/share/doc/gnutls-3.7.3 --disable-guile --disable-rpath --with-default-trust-store-pkcs11="pkcs11:"
         - make
         - make install DESTDIR="{{ .xbee.out }}"
-      directory: "{{ .xbee.src }}/gnutls-{{ .version }}"
+      directory: "{{ .xbee.src }}/gnutls-{{ .xbee.version }}"
